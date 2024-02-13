@@ -1,8 +1,6 @@
-// src/components/Router/Router.jsx
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Zmiana importu
-
-import styles from './Router.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import '../Router/Router.css'; // Poprawa importu
 
 const Home = lazy(() => import('../Home/Home'));
 const Movies = lazy(() => import('../Movies/Movies'));
