@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.70626e79.css","mappings":"AACA,KACE,wBACF","sources":["components/Router/Router.css"],"sourcesContent":["/* Router.css */\nbody {\n  background-color: lightgray;\n}\n"],"names":[],"sourceRoot":""}
