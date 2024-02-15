@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getTrendingMovies } from '../../api';
-
 import styles from './Home.module.css';
+import * as api from '../../api';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -10,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const data = await getTrendingMovies();
+        const data = await api.getTrendingMovies();
         setTrendingMovies(data.results);
       } catch (error) {
         console.error('Error fetching trending movies:', error);
@@ -22,11 +21,13 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-      <h1>Trending Movies</h1>
-      <ul>
+      <h2>Trending today</h2>
+      <ul className={styles.movieList}>
         {trendingMovies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          <li key={movie.id} className={styles.movieItem}>
+            <Link to={`/movies/${movie.id}`}>
+              <p>{movie.title}</p>
+            </Link>
           </li>
         ))}
       </ul>
