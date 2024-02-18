@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import styles from './MoviesDetails.module.css';
-import Cast from '../Cast/Cast';
-import Reviews from '../Reviews/Reviews';
 import * as api from '../../api';
 
 const MovieDetails = () => {
@@ -45,12 +43,15 @@ const MovieDetails = () => {
       <p>Additional information</p>
 
       <ul className={styles.buttonsList}>
-        <li onClick={handleCastClick}>Open Cast</li>
-        <li onClick={handleReviewsClick}>Open Reviews</li>
+        <li onClick={handleCastClick}>
+          <Link to={`/movies/${movieId}/cast`}>Open Cast</Link>
+        </li>
+        <li onClick={handleReviewsClick}>
+          <Link to={`/movies/${movieId}/reviews`}>Open Reviews</Link>
+        </li>
       </ul>
 
-      {showCast && <Cast movieId={movieId} />}
-      {showReviews && <Reviews movieId={movieId} />}
+      <Outlet />
     </div>
   );
 };
