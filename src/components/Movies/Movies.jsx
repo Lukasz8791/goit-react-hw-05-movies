@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Movies.module.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -37,11 +38,13 @@ const Movies = () => {
       <ul className={styles.movieList}>
         {searchResults.map(movie => (
           <li key={movie.id} className={styles.movieItem}>
-            <img
-              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-              alt={movie.title}
-            />
-            <p>{movie.title}</p>
+            <Link to={`/movies/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                alt={movie.title}
+              />
+              <p>{movie.title}</p>
+            </Link>
           </li>
         ))}
       </ul>

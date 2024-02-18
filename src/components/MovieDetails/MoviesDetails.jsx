@@ -1,59 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
-import styles from './MoviesDetails.module.css';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import Cast from '../Cast/Cast';
+import Reviews from '../Reviews/Reviews';
 import * as api from '../../api';
 
-const MovieDetails = () => {
-  const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState({});
-  const [showCast, setShowCast] = useState(false);
-  const [showReviews, setShowReviews] = useState(false);
+const MoviesDetails = () => {
+  const [movie, setMovie] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const data = await api.getMovieDetails(movieId);
-        setMovieDetails(data);
+        const movieId = window.location.pathname.split('/').pop();
+        const details = await api.getMovieDetails(movieId);
+        setMovie(details);
       } catch (error) {
         console.error('Error fetching movie details:', error);
+        navigate('/error');
       }
     };
 
     fetchMovieDetails();
-  }, [movieId]);
+  }, [navigate]);
 
-  const handleCastClick = () => {
-    setShowCast(!showCast);
-    setShowReviews(false);
-  };
-
-  const handleReviewsClick = () => {
-    setShowReviews(!showReviews);
-    setShowCast(false);
-  };
+  if (!movie) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div className={styles.movieDetails}>
-      <h2>{movieDetails.title}</h2>
+    <div>
+      <h1>{movie.title}</h1>
       <img
-        src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-        alt={movieDetails.title}
+        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+        alt={movie.title}
       />
-      <p>{movieDetails.overview}</p>
-      <p>Additional information</p>
+      <p>{movie.overview}</p>
+      <nav>
+        <Link to="cast">Cast</Link>
+        <Link to="reviews">Reviews</Link>
+      </nav>
 
-      <ul className={styles.buttonsList}>
-        <li onClick={handleCastClick}>
-          <Link to={`/movies/${movieId}/cast`}>Open Cast</Link>
-        </li>
-        <li onClick={handleReviewsClick}>
-          <Link to={`/movies/${movieId}/reviews`}>Open Reviews</Link>
-        </li>
-      </ul>
-
-      <Outlet />
+      <Routes>
+        <Route path="cast" element={<Cast />} />
+        <Route path="reviews" element={<Reviews />} />
+      </Routes>
     </div>
   );
 };
 
-export default MovieDetails;
+export default MoviesDetails;

@@ -9,7 +9,8 @@ const Home = () => {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const data = await api.getTrendingMovies();
+        const apiKey = 'beda84c819c00c5674b5621b8ea274af';
+        const data = await api.getTrendingMovies(apiKey);
         setTrendingMovies(data.results);
       } catch (error) {
         console.error('Error fetching trending movies:', error);

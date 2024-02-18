@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import styles from './Cast.module.css';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const Cast = ({ movieId }) => {
+const Cast = () => {
+  const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
     const fetchCast = async () => {
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits`,
-          {
-            params: {
-              api_key: 'beda84c819c00c5674b5621b8ea274af',
-            },
-          }
+        const apiKey = 'beda84c819c00c5674b5621b8ea274af';
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`
         );
-
-        setCast(response.data.cast);
+        if (!response.ok) {
+          throw new Error('Failed to fetch cast');
+        }
+        const data = await response.json();
+        setCast(data.cast);
       } catch (error) {
-        console.error('Error fetching cast:', error);
+        console.error('Error fetching cast:', error.message);
       }
     };
 
@@ -27,17 +26,11 @@ const Cast = ({ movieId }) => {
   }, [movieId]);
 
   return (
-    <div className={styles.cast}>
-      <h3>Cast</h3>
-      <ul className={styles.castList}>
+    <div>
+      <h2>Cast</h2>
+      <ul>
         {cast.map(actor => (
-          <li key={actor.id} className={styles.actor}>
-            <img
-              src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-              alt={actor.name}
-            />
-            <p>{actor.name}</p>
-          </li>
+          <li key={actor.id}>{actor.name}</li>
         ))}
       </ul>
     </div>

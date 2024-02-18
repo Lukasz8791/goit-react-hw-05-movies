@@ -1,11 +1,6 @@
 import React, { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '../Router/Router.css';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from 'react-router-dom';
 
 const Home = lazy(() => import('../Home/Home'));
 const Movies = lazy(() => import('../Movies/Movies'));
@@ -23,9 +18,8 @@ const AppRouter = () => {
           <Route path="/movies/:movieId" element={<MovieDetails />} />
           <Route path="/movies/:movieId/cast" element={<Cast />} />
           <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-          <Route path="/cast" element={<Cast />} />
-          <Route path="/reviews" element={<Reviews />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/goit-react-hw-05-movies" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </Suspense>
     </Router>
