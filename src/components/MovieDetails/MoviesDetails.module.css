@@ -1,0 +1,42 @@
+.movieDetails {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.movieImage {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 0 auto 20px;
+}
+
+.movieOverview {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.navLink {
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #2196f3;
+  border: 1px solid #2196f3;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.navLink:hover {
+  background-color: #2196f3;
+  color: #fff;
+}

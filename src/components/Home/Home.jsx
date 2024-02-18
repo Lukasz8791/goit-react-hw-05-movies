@@ -22,12 +22,12 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-      <h2>Trending today</h2>
+      <h2 className={styles.trendingTitle}>Trending today</h2>
       <ul className={styles.movieList}>
         {trendingMovies.map(movie => (
           <li key={movie.id} className={styles.movieItem}>
-            <Link to={`/movies/${movie.id}`}>
-              <p>{movie.title}</p>
+            <Link to={`/movies/${movie.id}`} className={styles.movieTitle}>
+              {movie.title}
             </Link>
           </li>
         ))}

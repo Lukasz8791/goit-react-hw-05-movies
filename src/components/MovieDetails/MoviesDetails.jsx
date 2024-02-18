@@ -3,6 +3,7 @@ import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import Cast from '../Cast/Cast';
 import Reviews from '../Reviews/Reviews';
 import * as api from '../../api';
+import styles from './MoviesDetails.module.css';
 
 const MoviesDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -28,16 +29,21 @@ const MoviesDetails = () => {
   }
 
   return (
-    <div>
+    <div className={styles.movieDetails}>
       <h1>{movie.title}</h1>
       <img
         src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
         alt={movie.title}
+        className={styles.movieImage}
       />
-      <p>{movie.overview}</p>
-      <nav>
-        <Link to="cast">Cast</Link>
-        <Link to="reviews">Reviews</Link>
+      <p className={styles.movieOverview}>{movie.overview}</p>
+      <nav className={styles.navLinks}>
+        <Link to="cast" className={styles.navLink}>
+          Cast
+        </Link>
+        <Link to="reviews" className={styles.navLink}>
+          Reviews
+        </Link>
       </nav>
 
       <Routes>

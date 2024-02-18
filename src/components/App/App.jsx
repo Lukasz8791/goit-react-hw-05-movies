@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import NavBar from '../NavBar/NavBar';
 
+console.log('NavBar imported in App component');
 const Home = lazy(() => import('./components/Home/Home'));
 const Movies = lazy(() => import('./components/Movies/Movies'));
 const MovieDetails = lazy(() =>
@@ -12,6 +14,7 @@ const Reviews = lazy(() => import('./components/Reviews/Reviews'));
 function App() {
   return (
     <Router>
+      <NavBar />
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route path="/" exact component={Home} />

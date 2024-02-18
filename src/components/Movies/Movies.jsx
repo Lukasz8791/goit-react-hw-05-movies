@@ -27,23 +27,29 @@ const Movies = () => {
 
   return (
     <div className={styles.movies}>
-      <h2>Search Movies</h2>
-      <input
-        type="text"
-        placeholder="Search for movies..."
-        value={searchQuery}
-        onChange={e => setSearchQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <h2 className={styles.searchTitle}>Search Movies</h2>
+      <div className={styles.searchContainer}>
+        <input
+          type="text"
+          placeholder="Search for movies..."
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          className={styles.searchInput}
+        />
+        <button onClick={handleSearch} className={styles.searchButton}>
+          Search
+        </button>
+      </div>
       <ul className={styles.movieList}>
         {searchResults.map(movie => (
           <li key={movie.id} className={styles.movieItem}>
-            <Link to={`/movies/${movie.id}`}>
+            <Link to={`/movies/${movie.id}`} className={styles.movieLink}>
               <img
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                 alt={movie.title}
+                className={styles.movieImage}
               />
-              <p>{movie.title}</p>
+              <p className={styles.movieTitle}>{movie.title}</p>
             </Link>
           </li>
         ))}

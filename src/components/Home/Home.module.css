@@ -1,0 +1,42 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.movieList {
+  padding: 0;
+}
+
+.movieItem {
+  list-style: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.movieTitle {
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+.movieTitle:hover {
+  color: #ff5722;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.trendingTitle {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4caf50;
+  text-align: center;
+  margin-bottom: 20px;
+}
