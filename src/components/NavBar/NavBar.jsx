@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './NavBar.module.css';
-console.log('NavBar component is here!');
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -9,8 +8,6 @@ const NavBar = () => {
   const handleSearch = () => {
     navigate(`/movies?query=${searchQuery}`);
   };
-
-  console.log('NavBar rendered');
 
   return (
     <nav className={styles.navBar}>
