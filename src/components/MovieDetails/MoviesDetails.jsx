@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, Route, Routes, Outlet, useNavigate } from 'react-router-dom'; // Dodaj Outlet tutaj
 import Cast from '../Cast/Cast';
 import Reviews from '../Reviews/Reviews';
 import * as api from '../../api';
@@ -47,8 +47,22 @@ const MoviesDetails = () => {
       </nav>
 
       <Routes>
-        <Route path="cast" element={<Cast />} />
-        <Route path="reviews" element={<Reviews />} />
+        <Route
+          path="cast"
+          element={
+            <Outlet>
+              <Cast />
+            </Outlet>
+          }
+        />
+        <Route
+          path="reviews"
+          element={
+            <Outlet>
+              <Reviews />
+            </Outlet>
+          }
+        />
       </Routes>
     </div>
   );
