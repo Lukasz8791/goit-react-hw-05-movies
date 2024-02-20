@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Route, Routes, Outlet, useNavigate } from 'react-router-dom'; // Dodaj Outlet tutaj
-import Cast from '../Cast/Cast';
-import Reviews from '../Reviews/Reviews';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+
 import * as api from '../../api';
 import styles from './MoviesDetails.module.css';
+import { useParams } from 'react-router-dom';
 
 const MoviesDetails = () => {
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const movieId = window.location.pathname.split('/').pop();
         const details = await api.getMovieDetails(movieId);
         setMovie(details);
       } catch (error) {
@@ -22,7 +22,7 @@ const MoviesDetails = () => {
     };
 
     fetchMovieDetails();
-  }, [navigate]);
+  }, [movieId, navigate]);
 
   if (!movie) {
     return <p>Loading...</p>;
@@ -46,24 +46,7 @@ const MoviesDetails = () => {
         </Link>
       </nav>
 
-      <Routes>
-        <Route
-          path="cast"
-          element={
-            <Outlet>
-              <Cast />
-            </Outlet>
-          }
-        />
-        <Route
-          path="reviews"
-          element={
-            <Outlet>
-              <Reviews />
-            </Outlet>
-          }
-        />
-      </Routes>
+      <Outlet />
     </div>
   );
 };
